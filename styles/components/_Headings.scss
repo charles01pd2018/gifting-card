@@ -1,0 +1,11 @@
+// breakpoints
+@use '../constants/breakpoints' as *;
+
+
+.headers-wrapper {
+    text-align: center;
+
+    // @media ( max-width: $breakpoint--large ) {
+    //     text-align: left;
+    // }
+}

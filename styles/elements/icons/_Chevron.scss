@@ -1,0 +1,38 @@
+// dependencies
+@use 'sass:math';
+// mixins
+@use './direction' as *;
+
+
+/*--------------------------------------------------------------
+# Variables
+--------------------------------------------------------------*/
+$chevron--thickness: 0.3em;
+$chevron--length: 1.8em;
+$chevron--border-radius: 3px;
+$chevron--color: #424242;
+// normalize left and right chevron to look cleaner
+$chevron--normalize: math.div( $chevron--length, 3 );
+
+/*--------------------------------------------------------------
+# Styling
+--------------------------------------------------------------*/
+.chevron {
+  display: block;
+  border-style: solid;
+  border-width: $chevron--thickness $chevron--thickness 0 0;
+  border-color: $chevron--color;
+  width: $chevron--length;
+  height: $chevron--length;
+  border-radius: $chevron--border-radius;
+
+  @include direction(
+    $normalize-horizontal: $chevron--normalize,
+    $start-angle: 45deg
+  );
+
+  /* TRANSITION */
+  &.flip {
+    transition: transform 0.22s ease;
+  }
+}

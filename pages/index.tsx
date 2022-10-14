@@ -8,6 +8,19 @@ import { Headings, Paragraphs, Container } from 'components';
 import type { HeadingsContent, ParagraphsContent } from 'components/types';
 import type { GetStaticProps } from 'next';
 
+/**
+ * TOGGABLE THINGS IN GIFT CARD
+ * 
+ * Sidebar
+ * 1. Gift card color
+ * 2. Background theme
+ * 3. Gift card type (logos)
+ * 
+ * Gift card
+ * 1. Title
+ * 2. Code
+ * 3. Message
+ */
 
 /* TYPES */
 interface Content {
@@ -56,7 +69,7 @@ const HomeContent: Content = {
   }
 };
 
-export const getStaticProps: GetStaticProps = () => {
+export const getServerSideProps: GetStaticProps = () => {
   const props: Props = {
     content: HomeContent,
   }

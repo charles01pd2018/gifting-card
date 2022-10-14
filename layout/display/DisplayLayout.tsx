@@ -1,5 +1,7 @@
 // dependencies
 import { ReactNode } from 'react';
+// elements
+import { MovingDotsBackground } from 'elements';
 
 
 /* TYPES */
@@ -14,6 +16,7 @@ const DisplayLayout = ( {
     return (
         <main className='display-layout container'>
             {children}
+            <MovingDotsBackground />
         </main>
     );
 }

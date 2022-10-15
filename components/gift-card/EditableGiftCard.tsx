@@ -15,7 +15,7 @@ export interface Props {
     customType?: string;
 }
 
-const GiftCard = ( {
+const EditableGiftCard = ( {
     id,
     className='',
     content,
@@ -28,16 +28,17 @@ const GiftCard = ( {
         msg } = content;
 
     /* CLASSNAMES */
-    const giftCardClasses = classNames(
+    const editableGiftCardClasses = classNames(
+        'editable-gift-card',
         'gift-card',
         className,
     );
 
     return (
-        <section id={id} className={giftCardClasses}>
+        <section id={id} className={editableGiftCardClasses}>
             Gift Card
         </section>
     )
 }
 
-export default GiftCard;
+export default EditableGiftCard;

@@ -1,9 +1,15 @@
 import type { Props as GiftCardProps,
-    Content as GiftCardContent,
-    GiftCardTypes } from './GiftCard';
+    Props as EditableGiftCardProps } from './GiftCard';
+
+export type GiftCardTypes = 'chipotle';
+
+export interface GiftCardContent {
+    gifter: string;
+    giftee: string;
+    msg?: string;
+}
 
 export type {
-    GiftCardContent,
     GiftCardProps,
-    GiftCardTypes,
+    EditableGiftCardProps,
 }

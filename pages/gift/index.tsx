@@ -1,3 +1,5 @@
+// components
+import { GiftCard } from 'components';
 // layout
 import { EditorLayout } from 'layout';
 // types

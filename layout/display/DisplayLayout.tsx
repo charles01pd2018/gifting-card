@@ -14,10 +14,12 @@ const DisplayLayout = ( {
 }: Props ) => {
 
     return (
-        <main className='display-layout container'>
-            {children}
+        <>
+            <main className='display-layout container'>
+                {children}
+            </main>
             <MovingDotsBackground />
-        </main>
+        </>
     );
 }
 

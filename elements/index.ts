@@ -1,5 +1,3 @@
-export * from './text';
-
 export * from './background';
 export * from './state-nav';
 export * from './svg';

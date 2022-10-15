@@ -4,13 +4,24 @@
 
 
 /*--------------------------------------------------------------
+# Font Family
+--------------------------------------------------------------*/
+@font-face {
+    font-family: "Questrial";
+    src: url("/static/fonts/Questrial.ttf");
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/*--------------------------------------------------------------
 # Variables
 --------------------------------------------------------------*/
-$h1-size: ( 2.6em, 3.3vw, 3.3em );
+$h1-size: ( 2em, 3.6vw, 3.7em );
 $header-tags: ( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
 $header-scale: 0.95; // how much each subsequent header will decrease in size
 
-$paragraph-size: ( 0.97em, 1.13vw, 1.05em );
+$paragraph-size: ( 1.1em, 1.2vw, 1.2em );
 $text-classnames: ( 'text--xlg', 'text--lg', 'text--norm', 'text--sm', 'text--xs', 'text--xxs', 'text--xxxs' );
 $text-scale: 0.95; // how much each subsequent text classname will decrease in size
 

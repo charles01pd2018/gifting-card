@@ -98,7 +98,7 @@ const SlideStateNav = ( {
     } ), [ activeIndex ] );
 
     return (
-        <ul id={id} ref={ref} className={slideStateNavClasses} role='list'>
+        <ul id={id} ref={ref} className={slideStateNavClasses}>
             <span className='background-slider'
                 aria-hidden={true} style={{
                     left: `${initialLeft}px`,

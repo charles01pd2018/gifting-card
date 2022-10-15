@@ -5,7 +5,7 @@ import classNames from 'classnames';
 // hooks
 import { useClickOutsideRef, useFocusTrap, useDelayUnmount } from 'hooks';
 // elements
-import { XClose } from 'elements';
+import { XCloseButton } from 'elements';
 
 
 /* TYPES */
@@ -66,7 +66,7 @@ const Modal = ( {
             <section id={id} className={modalWrapperClasses}>
                 <div ref={ref} className={modalClasses} role='dialog' aria-modal='true'
                     aria-labelledby={ariaLabelledBy} aria-describedby={ariaDescribedBy}>
-                    <XClose onClick={closeModal} ariaLabel='close modal' />
+                    <XCloseButton onClick={closeModal} ariaLabel='close modal' />
                     {children}
                 </div>
                 {

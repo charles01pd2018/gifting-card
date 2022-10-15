@@ -7,12 +7,14 @@ import { SVG } from 'elements';
 /* TYPES */
 export interface Props {
     className?: string;
-    href: string;
+    onClick: () => void;
+    ariaLabel: string;
 }
 
 const XCloseButton = ( {
     className='',
-    href,
+    onClick,
+    ariaLabel,
 }: Props ) => {
     /* CLASSNAMES */
     const xCloseButtonClasses = classNames(
@@ -21,7 +23,9 @@ const XCloseButton = ( {
     );
     
     return (
-        <button className={xCloseButtonClasses}>
+        <button className={xCloseButtonClasses} 
+            aria-label={ariaLabel}
+            onClick={onClick}>
 
         </button>
     )

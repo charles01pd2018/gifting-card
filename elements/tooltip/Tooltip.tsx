@@ -18,71 +18,53 @@ export interface Props {
 interface Styles {
     top?: string;
     left?: string;
+    bottom?: string;
+    right?: string;
 }
 
+/* CONSTANTS */
+const TOOLTIP_PADDING = 10;
+
 /* FUNCTIONS */
-interface GetStylesInput {
+interface GetTooltipStylesInput {
     ref:  RefObject<HTMLElement>;
     tooltipRef: RefObject<HTMLDivElement>;
     position: TooltipPositions;
 }
-const getStyles = ( input: GetStylesInput ) => {
+const getTooltipStyles = ( input: GetTooltipStylesInput ) => {
     const { ref, tooltipRef, position } = input;
     const tooltipRect = tooltipRef.current?.getBoundingClientRect();
     const refRect = ref.current?.getBoundingClientRect();
 
     if ( tooltipRect && refRect ) {
-        const docWidth = document.documentElement.clientWidth;
-        const docHeight = document.documentElement.clientHeight;
-
         if ( position === 'top' ) {
-            // // cannot fit on top, show below
-            // if ( refRect.y - tooltipRect.height >= 0 ) {
-
-            // }
-
-            const x = refRect.x + ( refRect.width - tooltipRect.width );
-    
             return {
-                tooltipStyles: {
-                    left: x < 0 ? `${refRect.x}px` : `${x}px`,
-                    bottom: `${refRect.y - tooltipRect.height}px`,
-                },
-                pointerStyles: {},
+                left: '50%',
+                bottom: `${refRect.height - tooltipRect.height + TOOLTIP_PADDING}px`
             }
         }
-        // else if ( position === 'bottom' ) {
-        //     // cannot fit on bottom, show above
-        //     if ( 
-        //         refRect.y + refRect.height + tooltipRect.height <=
-        //             window.scrollY + docHeight
-        //     ) {
-
-        //     }
-    
-        // }
-        // else if ( position === 'right' ) {
-        //     // cannot fit to the right, show left
-        //     if ( 
-        //         refRect.x + refRect.width + tooltipRect.width <= 
-        //             window.scrollX + docWidth 
-        //     ) {
-
-        //     }
-        // }
-        // else if ( position === 'left' ) {
-        //     // cannot fit to the left, show right
-        //     if ( refRect.x - tooltipRect.width >= 0 ) {
-
-        //     }
-        // }
+        else if ( position === 'bottom' ) {
+            return {
+                left: `50%`,
+                top: `${refRect.height + tooltipRect.height - TOOLTIP_PADDING}px`
+            }
+        }
+        else if ( position === 'left' ) {
+            return {
+                top: '50%',
+                right: `${refRect.width - TOOLTIP_PADDING}px`,
+            }
+        }
+        else if ( position === 'right' ) {
+            return {
+                top: '50%',
+                left: `${refRect.width + TOOLTIP_PADDING}px`,
+            }
+        }
     }
 
 
-    return {
-        tooltipStyles: {},
-        pointerStyles: {},
-    };
+    return {};
 }
 
 const Tooltip = forwardRef<HTMLElement, Props>( ( {
@@ -96,7 +78,6 @@ const Tooltip = forwardRef<HTMLElement, Props>( ( {
     const tooltipRef = useRef<HTMLDivElement>( null );
     const [ isActive, setIsActive ] = useState<boolean>( true );
     const [ tooltipStyles, setTooltipStyles ] = useState<Styles>( {} );
-    const [ pointerStyles, setPointerStyles ] = useState<Styles>( {} );
 
     /* FUNCTIONS */
     const handlePointerOver = useCallback( () => {
@@ -112,12 +93,11 @@ const Tooltip = forwardRef<HTMLElement, Props>( ( {
         'tooltip-wrapper',
         isActive ? 'active' : 'not-active',
         position,
-        includeArrow ? 'has-arrow' : '',
         className,
     );
     
-    const tooltipClasses = classNames(
-        'tooltip',
+    const pointerClasses = classNames(
+        'pointer',
         position,
     );
 
@@ -129,14 +109,11 @@ const Tooltip = forwardRef<HTMLElement, Props>( ( {
             ref.current?.addEventListener( 'pointerover', handlePointerOver );
             ref.current?.addEventListener( 'pointerleave', handlePointeLeave );
 
-            const { tooltipStyles, pointerStyles } = getStyles( {
+            setTooltipStyles( getTooltipStyles( {
                 ref,
                 tooltipRef,
                 position,
-            } );
-
-            setTooltipStyles( tooltipStyles );
-            setPointerStyles( pointerStyles );
+            } ) );
 
             return () => {
                 ref.current?.removeEventListener( 'pointerover', handlePointerOver );
@@ -148,8 +125,14 @@ const Tooltip = forwardRef<HTMLElement, Props>( ( {
     return (
         <div id={id} ref={tooltipRef} className={tooltipWrapperClasses} 
             role='tooltip' style={tooltipStyles}>
-            <span className={tooltipClasses} style={pointerStyles}>
+            <span className='tooltip'>
                 {children}
+                {
+                    includeArrow ? (
+                        <span className={pointerClasses}
+                            aria-hidden={true} />
+                    ) : ''
+                }
             </span>
         </div>
     )

@@ -7,6 +7,7 @@
     background: $background;
     border-radius: 7px;
 
+    transform: translate( -50%, -50% );
     transition: opacity $transition,
                 visibility $transition,
                 transform $transition;
@@ -14,59 +15,55 @@
     &.not-active {
         opacity: 0;
         visibility: hidden;
-        transform: scale( 0.8, 0.5 );
     }
 
-    &.has-arrow {
-        .tooltip {
-            $pointer-size: 7px;
+    .tooltip {
+        $pointer-size: 8px;
 
-            display: flex;
-            position: relative;
+        display: flex;
+        position: relative;
 
-            &:before {
-                content: '';
+        .pointer {
+            position: absolute;
+            transform: translate( -50%, -50% );
 
-                position: absolute;
-                transform: translate( -50%, -50% );
-            }
-            
             &.top {
-                &:before {
-                    top: calc( 100% + $pointer-size );
-                    left: 50%;
+                left: 50%;
+                top: calc( 100% + $pointer-size );
 
-                    border-left: $pointer-size solid transparent;
-                    border-right: $pointer-size solid transparent;
-                    border-top: $pointer-size solid $background;
-                }
+                border-left: $pointer-size solid transparent;
+                border-right: $pointer-size solid transparent;
+                border-top: $pointer-size solid $background;
             }
 
             &.bottom {
-                &:before {
-                    border-left: $pointer-size solid transparent;
-                    border-right: $pointer-size solid transparent;
-                    
-                    border-bottom: $pointer-size solid $background;
-                }
+                left: 50%;
+                top: -$pointer-size;
+
+                border-left: $pointer-size solid transparent;
+                border-right: $pointer-size solid transparent;
+                
+                border-bottom: $pointer-size solid $background;
             }
 
             &.left {
-                &:before {
-                    border-top: $pointer-size solid transparent;
-                    border-bottom: $pointer-size solid transparent;
-                    
-                    border-left: $pointer-size solid $background;
-                }
+                left: calc( 100% + $pointer-size );
+                top: 50%;
+
+                border-top: $pointer-size solid transparent;
+                border-bottom: $pointer-size solid transparent;
+                
+                border-left: $pointer-size solid $background;
             }
 
             &.right {
-                &:before {
-                    border-top: $pointer-size solid transparent;
-                    border-bottom: $pointer-size solid transparent; 
-                    
-                    border-right:$pointer-size solid $background; 
-                }
+                top: 50%;
+                left: -$pointer-size;
+
+                border-top: $pointer-size solid transparent;
+                border-bottom: $pointer-size solid transparent; 
+                
+                border-right:$pointer-size solid $background; 
             }
         }
     }
@@ -74,8 +71,6 @@
     /* POSITION */
     &.top {
         transform-origin: bottom;
-        bottom: 100%;
-        left: 50%;
     }
 
     &.bottom {
@@ -88,5 +83,21 @@
 
     &.left {
         transform-origin: right;
+    }
+
+    &.top,
+    &.bottom {
+        &.not-active {
+            transform: scaleY( 0.8 )
+                        translate( -50%, -50% );
+        }
+    }
+
+    &.right,
+    &.left {
+        &.not-active {
+            transform: scaleX( 0.8 )
+                        translate( -50%, -50% );
+        }
     }
 }

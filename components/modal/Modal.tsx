@@ -1,5 +1,5 @@
 // dependencies
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 // hooks
@@ -41,7 +41,6 @@ const Modal = ( {
 }: Props ) => {
     /* HOOKS */
     const [ ref ] = useClickOutsideRef<HTMLDivElement>( closeModal );
-    const [ isSubmitting, setIsSubmitting ] = useState<boolean>( false );
     const shouldRender = useDelayUnmount( isActive, mountTime );
 
     /* CLASSNAMES */
@@ -52,7 +51,6 @@ const Modal = ( {
 
     const modalClasses = classNames(
         'modal',
-        `${isSubmitting ? 'loading' : ''}`,
         className,
     );
 

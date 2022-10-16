@@ -1,3 +1,92 @@
-.tooltip {
-    
+.tooltip-wrapper {
+    $transition: 0.21s ease;
+    $background: #edeae1;
+
+    position: absolute;
+    padding: 5px 8px;
+    background: $background;
+    border-radius: 7px;
+
+    transition: opacity $transition,
+                visibility $transition,
+                transform $transition;
+
+    &.not-active {
+        opacity: 0;
+        visibility: hidden;
+        transform: scale( 0.8, 0.5 );
+    }
+
+    &.has-arrow {
+        .tooltip {
+            $pointer-size: 7px;
+
+            display: flex;
+            position: relative;
+
+            &:before {
+                content: '';
+
+                position: absolute;
+                transform: translate( -50%, -50% );
+            }
+            
+            &.top {
+                &:before {
+                    top: calc( 100% + $pointer-size );
+                    left: 50%;
+
+                    border-left: $pointer-size solid transparent;
+                    border-right: $pointer-size solid transparent;
+                    border-top: $pointer-size solid $background;
+                }
+            }
+
+            &.bottom {
+                &:before {
+                    border-left: $pointer-size solid transparent;
+                    border-right: $pointer-size solid transparent;
+                    
+                    border-bottom: $pointer-size solid $background;
+                }
+            }
+
+            &.left {
+                &:before {
+                    border-top: $pointer-size solid transparent;
+                    border-bottom: $pointer-size solid transparent;
+                    
+                    border-left: $pointer-size solid $background;
+                }
+            }
+
+            &.right {
+                &:before {
+                    border-top: $pointer-size solid transparent;
+                    border-bottom: $pointer-size solid transparent; 
+                    
+                    border-right:$pointer-size solid $background; 
+                }
+            }
+        }
+    }
+
+    /* POSITION */
+    &.top {
+        transform-origin: bottom;
+        bottom: 100%;
+        left: 50%;
+    }
+
+    &.bottom {
+        transform-origin: top;
+    }
+
+    &.right {
+        transform-origin: left;
+    }
+
+    &.left {
+        transform-origin: right;
+    }
 }

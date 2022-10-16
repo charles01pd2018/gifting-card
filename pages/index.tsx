@@ -7,6 +7,9 @@ import { EditableGiftCard } from 'components';
 // types
 import type { GetStaticProps } from 'next';
 
+import { useRef } from 'react';
+import { Tooltip } from 'elements';
+
 /**
  * TOGGABLE THINGS IN GIFT CARD
  * 
@@ -20,6 +23,7 @@ import type { GetStaticProps } from 'next';
  * 2. Code
  * 3. Message
  */
+
 
 /* TYPES */
 interface Content {
@@ -36,12 +40,27 @@ const Home = ( {
   /* CONTENT */
   const { pageTitle} = content;
 
+  const ref = useRef<HTMLDivElement>( null );
+  const id = 'har';
+
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
       </Head>
       <DisplayLayout>
+        <div ref={ref} className='wrapper' 
+          aria-describedby={id} style={{
+            position: 'relative',
+            marginTop: '3rem',
+            width: 'max-content',
+            border: '2px solid red',
+        }}>
+          <p className='h6'>Ballocks</p>
+          <Tooltip id={id} ref={ref}>
+              har har h
+          </Tooltip>
+        </div>
       </DisplayLayout>
     </>
   
